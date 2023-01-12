@@ -7,20 +7,16 @@ import {
   Animated,
   StyleSheet,
 } from "react-native";
-import {SafeAreaView} from 'react-native-safe-area-context'
+import { SafeAreaView } from "react-native-safe-area-context";
 
 interface ITabInterface {
-  tabs: { name: string, screen: JSX.Element, icon: any }[]
+  tabs: { name: string; screen: JSX.Element; icon: any }[];
 }
 
 const { width } = Dimensions.get("window");
 export default function TabBar({ tabs }: ITabInterface) {
   const [currentScreen, setCurrentScreen] = useState(0);
-  const [screens] = useState([
-    { id: 1, name: "Screen 1", screen: <Text style={{ flex: 1, backgroundColor: "green", width: Dimensions.get("window").width, height: "100%"  }}>trad</Text>  },
-    { id: 2, name: "Screen 2", screen: <Text style={{ flex: 1, backgroundColor: "yellow", width: Dimensions.get("window").width  }}>Dict</Text> },
-    { id: 3, name: "Screen 3" },
-  ]);
+  
   const nextScreenRef = useRef(0);
   const [position, setPosition] = useState(
     new Animated.ValueXY({ x: 0, y: 0 })
@@ -105,14 +101,14 @@ export default function TabBar({ tabs }: ITabInterface) {
       >
         {tabs.map((screen) => (
           <View key={screen.name} style={styles.screen}>
-            <Text>{screens[currentScreen].screen}</Text>
+            <Text>{tabs[currentScreen].screen}</Text>
           </View>
         ))}
       </Animated.View>
       <View style={styles.buttonsContainer}>
-        {screens.map((screen, index) => (
+        {tabs.map((screen, index) => (
           <TouchableOpacity
-            key={screen.id}
+            key={screen.name}
             style={styles.button}
             onPress={() => {
               handleTransition(index);
