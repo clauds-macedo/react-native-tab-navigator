@@ -22,7 +22,9 @@ export default function TabBar({ tabs }: ITabInterface) {
     new Animated.ValueXY({ x: 0, y: 0 })
   );
   const [fadeAnim, setFadeAnim] = useState(new Animated.Value(1));
+  
   console.log(currentScreen);
+
   useEffect(() => {
     const animationListener = fadeAnim.addListener(({ value }) => {
       if (value === 0) {
@@ -36,6 +38,7 @@ export default function TabBar({ tabs }: ITabInterface) {
 
   const handleTransition = (nextScreen: number) => {
     nextScreenRef.current = nextScreen;
+    if (currentScreen === nextScreen) return;
     if (nextScreen < currentScreen) {
       //to previous screen
       Animated.sequence([
@@ -46,7 +49,7 @@ export default function TabBar({ tabs }: ITabInterface) {
         }),
         Animated.timing(position.x, {
           toValue: width,
-          duration: 200,
+          duration: 300,
           useNativeDriver: true,
         }),
         Animated.parallel([
@@ -57,7 +60,7 @@ export default function TabBar({ tabs }: ITabInterface) {
           }),
           Animated.timing(position.x, {
             toValue: 0,
-            duration: 200,
+            duration: 300,
             useNativeDriver: true,
           }),
         ]),
@@ -67,23 +70,23 @@ export default function TabBar({ tabs }: ITabInterface) {
       Animated.sequence([
         Animated.timing(fadeAnim, {
           toValue: 0,
-          duration: 400,
+          duration: 300,
           useNativeDriver: true,
         }),
         Animated.timing(position.x, {
           toValue: -width,
-          duration: 200,
+          duration: 100,
           useNativeDriver: true,
         }),
         Animated.parallel([
           Animated.timing(fadeAnim, {
             toValue: 1,
-            duration: 400,
+            duration: 300,
             useNativeDriver: true,
           }),
           Animated.timing(position.x, {
             toValue: 0,
-            duration: 200,
+            duration: 300,
             useNativeDriver: true,
           }),
         ]),
@@ -100,9 +103,7 @@ export default function TabBar({ tabs }: ITabInterface) {
         ]}
       >
         {tabs.map((screen) => (
-          <View key={screen.name} style={styles.screen}>
-            <Text>{tabs[currentScreen].screen}</Text>
-          </View>
+            <View>{tabs[currentScreen].screen}</View>
         ))}
       </Animated.View>
       <View style={styles.buttonsContainer}>
@@ -145,9 +146,10 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: "100%",
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
+    backgroundColor: "#FFF",
+    padding: 15
   },
   button: {
-    padding: 10,
   },
 });

@@ -7,7 +7,7 @@ export default function App() {
     <View style={styles.container}>
       <TabBar
         tabs={[
-          { name: "Tradutor", icon: <></>, screen: <Text style={{ flex: 1, backgroundColor: "green", width: Dimensions.get("window").width  }}>trad</Text> },
+          { name: "Tradutor", icon: <></>, screen: <Text style={{ flex: 1, backgroundColor: "green", width: Dimensions.get("window").width }}>tradasdsadasds</Text> },
           { name: "Dicionário", icon: <></>, screen: <Text style={{ flex: 1, backgroundColor: "yellow", width: Dimensions.get("window").width  }}>Dict</Text> },
         ]}
       />
