@@ -23,8 +23,6 @@ export default function TabBar({ tabs }: ITabInterface) {
   );
   const [fadeAnim, setFadeAnim] = useState(new Animated.Value(1));
   
-  console.log(currentScreen);
-
   useEffect(() => {
     const animationListener = fadeAnim.addListener(({ value }) => {
       if (value === 0) {
