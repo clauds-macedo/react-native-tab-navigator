@@ -16,13 +16,13 @@ interface ITabInterface {
 const { width } = Dimensions.get("window");
 export default function TabBar({ tabs }: ITabInterface) {
   const [currentScreen, setCurrentScreen] = useState(0);
-  
+
   const nextScreenRef = useRef(0);
   const [position, setPosition] = useState(
     new Animated.ValueXY({ x: 0, y: 0 })
   );
   const [fadeAnim, setFadeAnim] = useState(new Animated.Value(1));
-  
+
   useEffect(() => {
     const animationListener = fadeAnim.addListener(({ value }) => {
       if (value === 0) {
@@ -100,9 +100,7 @@ export default function TabBar({ tabs }: ITabInterface) {
           { opacity: fadeAnim },
         ]}
       >
-        {tabs.map((screen) => (
-            <View>{tabs[currentScreen].screen}</View>
-        ))}
+        {<View>{tabs[currentScreen].screen}</View>}
       </Animated.View>
       <View style={styles.buttonsContainer}>
         {tabs.map((screen, index) => (
@@ -146,8 +144,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     backgroundColor: "#FFF",
-    padding: 15
+    padding: 15,
   },
-  button: {
-  },
+  button: {},
 });
